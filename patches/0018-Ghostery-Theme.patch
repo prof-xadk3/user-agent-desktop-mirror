@@ -6,7 +6,7 @@ Fix theme
 
 X
 ---
- toolkit/modules/LightweightThemeConsumer.jsm  |   2 +-
+ toolkit/modules/LightweightThemeConsumer.sys.mjs  |   2 +-
  .../extensions/default-theme/experiment10.css | 257 ++++++++++++++++++
  .../extensions/default-theme/manifest.json    |  57 +---
  .../extensions/internal/XPIProvider.jsm       |  20 +-
@@ -14,17 +14,17 @@ X
  5 files changed, 293 insertions(+), 44 deletions(-)
  create mode 100644 toolkit/mozapps/extensions/default-theme/experiment10.css
 
-diff --git a/toolkit/modules/LightweightThemeConsumer.jsm b/toolkit/modules/LightweightThemeConsumer.jsm
+diff --git a/toolkit/modules/LightweightThemeConsumer.sys.mjs b/toolkit/modules/LightweightThemeConsumer.sys.mjs
 index a12dfc7746..f80f2c9db3 100644
---- a/toolkit/modules/LightweightThemeConsumer.jsm
-+++ b/toolkit/modules/LightweightThemeConsumer.jsm
-@@ -41,7 +41,7 @@ XPCOMUtils.defineLazyPreferenceGetter(
+--- a/toolkit/modules/LightweightThemeConsumer.sys.mjs
++++ b/toolkit/modules/LightweightThemeConsumer.sys.mjs
+@@ -30,7 +30,7 @@ XPCOMUtils.defineLazyPreferenceGetter(
    false
  );
- 
+
 -const DEFAULT_THEME_ID = "default-theme@mozilla.org";
 +const DEFAULT_THEME_ID = "__DOES_NOT_APPLY__"; // in Ghostery Browser default theme is a lightweight theme
- 
+
  // On Linux, the default theme picks up the right colors from dark GTK themes.
  const DEFAULT_THEME_RESPECTS_SYSTEM_COLOR_SCHEME =
 diff --git a/toolkit/mozapps/extensions/default-theme/experiment10.css b/toolkit/mozapps/extensions/default-theme/experiment10.css
@@ -297,7 +297,7 @@ index 5f62671c5f..87c2c5d049 100644
 @@ -7,35 +7,32 @@
      }
    },
- 
+
 -  "name": "System theme — auto",
 -  "description": "Follow the operating system setting for buttons, menus, and windows.",
 -  "author": "Mozilla",
@@ -306,9 +306,9 @@ index 5f62671c5f..87c2c5d049 100644
 +  "description": "",
 +  "author": "Ghostery",
 +  "version": "1.11",
- 
+
    "icons": {"32": "icon.svg"},
- 
+
    "theme": {
 -  },
 -
@@ -352,9 +352,9 @@ index 5f62671c5f..87c2c5d049 100644
        "tab_icon_overlay_fill": "rgb(251,251,254)"
      },
      "properties": {
-@@ -69,30 +66,6 @@
+@@ -68,29 +65,6 @@
    },
- 
+
    "theme_experiment": {
 -    "colors": {
 -      "button": "--button-bgcolor",
@@ -364,7 +364,6 @@ index 5f62671c5f..87c2c5d049 100644
 -      "button_primary_hover": "--button-primary-hover-bgcolor",
 -      "button_primary_active": "--button-primary-active-bgcolor",
 -      "button_primary_color": "--button-primary-color",
--      "error_text_color": "--error-text-color",
 -      "input_background": "--input-bgcolor",
 -      "input_color": "--input-color",
 -      "input_border": "--input-border-color",
@@ -396,7 +395,7 @@ index 39fa8b4208..8b620a3e16 100644
 +        "1.11",
          "resource://default-theme/"
        );
- 
+
 @@ -2697,6 +2697,10 @@ var XPIProvider = {
        logger.error("startup failed", e);
        AddonManagerPrivate.recordException("XPI", "startup failed", e);
@@ -406,12 +405,12 @@ index 39fa8b4208..8b620a3e16 100644
 +    this.maybeUninstallBuiltinAddon("firefox-compact-dark@mozilla.org");
 +    this.maybeUninstallBuiltinAddon("firefox-alpenglow@mozilla.org");
    },
- 
+
    /**
 @@ -2977,6 +2981,20 @@ var XPIProvider = {
      return installed;
    },
- 
+
 +  async maybeUninstallBuiltinAddon(aID) {
 +    if (enabledScopes & BuiltInLocation.scope) {
 +      let existing = BuiltInLocation.get(aID);
@@ -439,6 +438,6 @@ index 58f25876f2..d8d8008b39 100644
    content/mozapps/extensions/default-theme/manifest.json        (default-theme/manifest.json)
 +  content/mozapps/extensions/default-theme/experiment10.css      (default-theme/experiment10.css)
  #endif
--- 
+--
 2.37.2
 
