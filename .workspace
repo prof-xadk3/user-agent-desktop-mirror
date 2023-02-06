@@ -1,4 +1,4 @@
-
+{
   "addons": {
     "ghostery": "https://github.com/ghostery/ghostery-extension/releases/download/v8.9.8/ghostery-dawn-v8.9.8.zip",
     "ghostery-search": "https://github.com/ghostery/ghostery-search-extension/releases/download/v1.0.2/ghostery_glow-1.0.2.zip",
