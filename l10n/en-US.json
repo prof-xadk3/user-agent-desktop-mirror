@@ -63,6 +63,9 @@
     }
   },
   "browser/browser/browser.ftl": {
+    "private-browsing-indicator-label": {
+      "string": "Ghost Mode"
+    },
     "identity-custom-root": {
       "string": "Connection verified by a certificate issuer that is not recognized by { -brand-short-name }."
     },
