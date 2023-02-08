@@ -248,11 +248,6 @@
       "string": "Im Ghost-Modus bleiben"
     }
   },
-  "devtools/client/performance.dtd": {
-    "performanceUI.unavailableNoticePB": {
-      "string": "Derzeit kann kein Profil aufgezeichnet werden. Bitte schließen Sie alle Fenster im Ghost-Modus und versuchen Sie es erneut."
-    }
-  },
   "browser/browser/tabbrowser.ftl": {
     "tabbrowser-empty-private-tab-title": {
       "string": "Ghost-Modus"

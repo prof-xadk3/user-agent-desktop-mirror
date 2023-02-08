@@ -248,11 +248,6 @@
       "string": "Rester en mode Ghost"
     }
   },
-  "devtools/client/performance.dtd": {
-    "performanceUI.unavailableNoticePB": {
-      "string": "L'enregistrement de profil est actuellement indisponible. Veuillez fermer toutes les fenêtres en mode Ghost et réessayer."
-    }
-  },
   "browser/browser/tabbrowser.ftl": {
     "tabbrowser-empty-private-tab-title": {
       "string": "Mode Fantôme"
